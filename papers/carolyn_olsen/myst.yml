@@ -4,10 +4,10 @@ project:
   id: scipy-2026-carolyn_olsen
   title: 'Voice Capture, Structured Extraction, and Multi-Source Routing: Building and Evaluating a Field-Inspection Assistant in Python'
   description: |
-    HiveGuide is an open-source Python application for voice-driven field
-    inspection that pairs typed structured extraction with a multi-source
-    retrieval-augmented generation assistant, evaluated through a reproducible
-    benchmark comparing seven query-routing strategies.
+    HiveGuide is an open-source Python application for voice-driven beekeeping
+    inspection, adaptable to other field domains, that pairs typed structured
+    extraction with a multi-source retrieval-augmented generation assistant,
+    evaluated through a controlled comparison of seven query-routing strategies.
   authors:
     - name: Carolyn Olsen
       email: carolyn.olsen@gmail.com
@@ -34,6 +34,10 @@ project:
     TF-IDF: Term Frequency-Inverse Document Frequency
     k-NN: k-Nearest Neighbors
     USD: United States Dollar
+    PDF: Portable Document Format
+    JSON: JavaScript Object Notation
+    HVAC: Heating, Ventilation, and Air Conditioning
+    propolis: a sticky, resinous substance produced by honeybees
   error_rules:
     - rule: doi-exists
       severity: ignore
