@@ -2,7 +2,9 @@ version: 1
 extends: ../papers.yml
 project:
   id: scipy-2026-carolyn_olsen
-  title: 'Voice Capture, Structured Extraction, and Multi-Source Routing: Building and Evaluating a Field-Inspection Assistant in Python'
+  title:
+    'Voice Capture, Structured Extraction, and Multi-Source Routing: Building
+    and Evaluating a Field-Inspection Assistant in Python'
   description: |
     HiveGuide is an open-source Python application for voice-driven beekeeping
     inspection, adaptable to other field domains, that pairs typed structured
