@@ -28,6 +28,7 @@ data_availability: |
   HiveGuide, the validation harness, the 501 evaluation queries with ground truth,
   the frozen result tables, and the figure-generation scripts are available at
   https://github.com/CarolynOlsen/hiveguide_public under a CC-BY-NC license.
+bibliography: mybib.bib
 ---
 
 ## Introduction
