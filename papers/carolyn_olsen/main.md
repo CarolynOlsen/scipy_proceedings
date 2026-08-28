@@ -367,6 +367,9 @@ chunk-level ground truth (most `personal_only` queries) are excluded from the hi
 denominator. Response quality uses two **RAGAS** metrics (context relevance and
 response groundedness, 0-1) judged reference-free by Claude Haiku 4.5 at temperature
 0; context relevance is computed only for queries that retrieved document context.
+We use Haiku because it is inexpensive and because it comes from a different
+model family than the GPT-4o classifier and the `gpt-oss-120b` generator, so the
+judge is not scoring outputs from its own family.
 End-to-end **latency** is measured with `perf_counter` and includes retries, and
 **cost** combines per-model token usage at list prices for GPT-4o, `gpt-oss-120b`, and
 the Claude Haiku 4.5 judge. A query counts as an **error** when the strategy returns
