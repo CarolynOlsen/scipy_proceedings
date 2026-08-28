@@ -499,7 +499,11 @@ fail on a large fraction of queries.
 97.8% accuracy and the best Hit@5 (19.5%), matching always-both while avoiding
 unnecessary retrieval. The embedding router achieved 87.0% with no model training
 (only labeled example queries), making it attractive when training data is scarce.
-Heuristics captured surprising signal (73.1%) from keyword patterns alone.
+Heuristics captured surprising signal (73.1%) from keyword patterns alone. The two
+numbers measure different steps: routing accuracy is whether we queried the right
+source; Hit@5 is whether the vector store then returned the annotated chunk.
+Supervised routing is nearly perfect and still ties always-both at 19.5%, so the
+ceiling is retrieval, not source selection.
 
 **The LLM classifier underperformed at routing.** Despite semantic capability, it
 scored only 54.9% accuracy, with just 11.9% recall on `documents_only`: it was
