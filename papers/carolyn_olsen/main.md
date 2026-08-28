@@ -130,8 +130,8 @@ the pgvector extension [@pgvector]; orchestration uses LangChain [@langchain]; t
 client is a React Native (iOS) app; and all model calls are routed through
 OpenRouter: GPT-4o for intent classification, `gpt-oss-120b` for generation, and
 `text-embedding-3-large` for vectors. These three lanes are the units a forker
-keeps; only their domain-specific contents (the extraction schema, the document
-corpus, and the routing keys) change from one field to the next.
+keeps; only their domain-specific contents change from one field to the next
+(@tbl:fork).
 
 :::{figure} figures/architecture.png
 :label: fig:arch
@@ -169,6 +169,27 @@ configurable window (default one year) and formats the matching inspections as
 context; document retrieval ranks chunks by cosine similarity and returns the top ten
 (displaying up to five sources). A lightweight validation step rejects generic,
 ungrounded answers and forces a retry.
+
+**Work required to fork for other disciplines:**
+The pipelines and the routing interface can run unchanged. Forkers will need to swap out
+the schema, the corpus, and the routing keys, as well asyou retouch a short list of tools and labels: the SQL query, the heuristic cues, the hive as the inspected unit, so they point at the new domain (@tbl:fork).
+
+```{list-table} What a forker keeps, swaps, and retouches.
+:label: tbl:fork
+:header-rows: 1
+* - Adaptation
+  - Components
+* - Keep as-is
+  - Capture, ingestion, and assistant lanes; routing to the structured store,
+    the vector store, or both; validation harness
+* - Swap
+  - Extraction schema (change from queen/eggs/brood to relevant inspection fields);
+    document corpus (change from extension PDFs to relevant authoritative sources); routing keys (labeled example queries for the embedding or supervised router)
+* - Retouch
+  - Personal-data SQL tool (`get_user_hive_data`); heuristic cues and LLM
+    few-shot examples; hive entity model; rule-based extraction fallback;
+    iOS labels and pickers
+```
 
 ## Reliable structured extraction
 
@@ -584,10 +605,11 @@ That study exists to support an artifact we want others to use. The
 capture-extract-retrieve pattern is not specific to
 beekeeping: it fits any setting where a practitioner records observations in the
 field and must weigh them against authoritative reference knowledge. Adapting
-HiveGuide changes exactly three things: your **schema** (replace queen/eggs/brood with
+HiveGuide is the split in @tbl:fork: swap your **schema** (replace queen/eggs/brood with
 the fields your inspections capture), your **corpus** (swap extension PDFs for your
 authoritative sources), and your **routing keys** (relabel example queries for the
-embedding router or retrain the supervised classifier). The capture, ingestion,
+embedding router or retrain the supervised classifier), and retouch the few tools
+and labels that still say hive. The capture, ingestion,
 and assistant lanes and the evaluation harness stay the same. So we release the
 entire open-source application together with the harness and the queries
 and frozen results behind this study, not just the headline numbers. Fork HiveGuide,
