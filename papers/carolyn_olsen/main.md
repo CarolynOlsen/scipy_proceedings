@@ -289,7 +289,9 @@ We compare seven strategies for producing the intent label.
   `both_combined`.
 - **Embedding similarity.** A RouteLLM-style k-NN router (shown below) over 20
   labeled example queries per category (60 vectors) drawn from the training split,
-  using `k=3` neighbors tuned on a held-out split.
+  using `k=3` neighbors tuned on a 99-query held-out split (20% of the 499-query
+  training split, stratified by intent, seed 42). The 501-query evaluation set is
+  not used to choose `k`.
 - **Supervised.** A LightGBM [@lightgbm] classifier (`num_leaves=31`,
   `learning_rate=0.05`, 100 boosting rounds) trained on TF-IDF features (unigrams
   and bigrams, up to 5000, via scikit-learn [@sklearn]) of the 499-query training
@@ -325,7 +327,7 @@ single nearest match), then routes to the highest-scoring category:
 ```python
 def classify_intent(self, query, k=None):
     if k is None:
-        k = self.default_k                          # k=3, tuned on held-out split
+        k = self.default_k                          # k=3, tuned on 99-query held-out split
     query_emb = self.embed_query(query)
     category_scores = {}
     for category, data in self.index["categories"].items():
